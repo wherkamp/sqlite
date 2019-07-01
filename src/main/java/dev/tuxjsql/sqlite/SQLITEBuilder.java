@@ -13,12 +13,13 @@ import dev.tuxjsql.core.sql.select.SelectStatement;
 import dev.tuxjsql.core.sql.where.SubWhereStatement;
 import dev.tuxjsql.core.sql.where.WhereStatement;
 
+import java.io.File;
 import java.util.Properties;
 
-public class SQLITEBuilder extends BasicSQLBuilder {
-    public static final String URL = "";
-    public static final String JDBC_CLASS = "";
-    public static final SQLAction[] SUPPORTED_ACTIONS = {};
+public final class SQLITEBuilder extends BasicSQLBuilder {
+    public static final String URL = "jdbc:sqlite:%1$s";
+    public static final String JDBC_CLASS = "org.sqlite.JDBC";
+    public static final SQLAction[] SUPPORTED_ACTIONS = {SQLAction.SELECT, SQLAction.INSERT, SQLAction.UPDATE, SQLAction.DELETE};
     @Override
     public TableBuilder createTable() {
         return new SQLITETableBuilder(tuxJSQL);
@@ -97,11 +98,20 @@ public class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public void configureConnectionProvider(ConnectionProvider provider, Properties userProperties) {
-        provider.setup(new ConnectionSettings(jdbcClass(), String.format(URL, userProperties.getProperty("file"))), userProperties);
+        String url;
+        if (userProperties.getProperty("file").equalsIgnoreCase("memory")) {
+            url = String.format(URL, ":memory:");
+        } else {
+            File file = new File(userProperties.getProperty("file"));
+            url = String.format(URL, file.getAbsolutePath());
+        }
+        if (TuxJSQL.getLogger().isDebugEnabled())
+            TuxJSQL.getLogger().debug(String.format("URL:%s", url));
+        provider.setup(new ConnectionSettings(jdbcClass(), url), userProperties);
     }
 
     @Override
     public <T> ColumnBuilder<T> createColumn(T t) {
-        return null;
+        return new SQLITEColumnBuilder<>(t);
     }
 }
