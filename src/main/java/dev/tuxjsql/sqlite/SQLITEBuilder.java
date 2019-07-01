@@ -2,6 +2,7 @@ package dev.tuxjsql.sqlite;
 
 import dev.tuxjsql.basic.builders.BasicSQLBuilder;
 import dev.tuxjsql.basic.sql.BasicDataTypes;
+import dev.tuxjsql.core.TuxJSQL;
 import dev.tuxjsql.core.builders.ColumnBuilder;
 import dev.tuxjsql.core.builders.TableBuilder;
 import dev.tuxjsql.core.connection.ConnectionProvider;
@@ -18,10 +19,9 @@ public class SQLITEBuilder extends BasicSQLBuilder {
     public static final String URL = "";
     public static final String JDBC_CLASS = "";
     public static final SQLAction[] SUPPORTED_ACTIONS = {};
-
     @Override
     public TableBuilder createTable() {
-        return null;
+        return new SQLITETableBuilder(tuxJSQL);
     }
 
     @Override
@@ -76,11 +76,6 @@ public class SQLITEBuilder extends BasicSQLBuilder {
     }
 
     @Override
-    public String key() {
-        return "SQLITE";
-    }
-
-    @Override
     public String jdbcClass() {
         return JDBC_CLASS;
     }
@@ -92,7 +87,7 @@ public class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public SQLDataType convertDataType(BasicDataTypes dataType) {
-        return null;
+        return dataType;
     }
 
     @Override
