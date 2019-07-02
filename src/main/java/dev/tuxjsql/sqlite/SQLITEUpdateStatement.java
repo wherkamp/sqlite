@@ -40,8 +40,11 @@ public class SQLITEUpdateStatement extends BasicUpdateStatement {
         }
         String query = String.format(Queries.UPDATE.getString(), sqlTable.getName(), columnToUpdate, whereStatement.getQuery());
         values.addAll(Arrays.asList(whereStatement.getValues()));
-        TuxJSQL.getLogger().debug(query);
-        try (Connection connection = tuxJSQL.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        if(TuxJSQL.getLogger().isDebugEnabled())
+            TuxJSQL.getLogger().debug(query);
+
+        try (Connection connection = tuxJSQL.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             int i = 1;
             for (Object value : values) {
                 preparedStatement.setObject(i, value);

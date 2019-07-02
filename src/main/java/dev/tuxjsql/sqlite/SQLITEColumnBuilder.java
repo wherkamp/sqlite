@@ -8,8 +8,12 @@ public class SQLITEColumnBuilder<T> extends BasicColumnBuilder<T> {
         super(andValue);
     }
 
+    public SQLITEColumnBuilder() {
+        super(null);
+    }
+
     @Override
     public SQLColumn build() {
-        return null;
+        return new SQLITEColumn(getName(), getDefaultValue(), getDataTypeRules(), isNotNull(), isUnique(), isAutoIncrement(), isPrimaryKey(), getForeignColumn(), getTable(), getType());
     }
 }

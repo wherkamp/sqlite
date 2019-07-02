@@ -27,7 +27,7 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public ColumnBuilder createColumn() {
-        return null;
+        return new SQLITEColumnBuilder();
     }
 
     @Override
@@ -63,12 +63,12 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public UpdateStatement createUpdateStatement() {
-        return null;
+        return new SQLITEUpdateStatement(tuxJSQL);
     }
 
     @Override
     public DeleteStatement createDeleteStatement() {
-        return null;
+        return new SQLITEDeleteStatement(tuxJSQL);
     }
 
     @Override
@@ -99,10 +99,10 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
     @Override
     public void configureConnectionProvider(ConnectionProvider provider, Properties userProperties) {
         String url;
-        if (userProperties.getProperty("file").equalsIgnoreCase("memory")) {
+        if (userProperties.getProperty("db.file").equalsIgnoreCase("memory")) {
             url = String.format(URL, ":memory:");
         } else {
-            File file = new File(userProperties.getProperty("file"));
+            File file = new File(userProperties.getProperty("db.file"));
             url = String.format(URL, file.getAbsolutePath());
         }
         if (TuxJSQL.getLogger().isDebugEnabled())
