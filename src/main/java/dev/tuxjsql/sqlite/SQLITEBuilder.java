@@ -32,22 +32,22 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public WhereStatement createWhere() {
-        return null;
+        return new SQLITEWhereStatement(tuxJSQL);
     }
 
     @Override
     public SubWhereStatement createSubWhereStatement() {
-        return null;
+        return new SQLITESubWhereStatement(tuxJSQL);
     }
 
     @Override
     public <T> WhereStatement<T> createWhere(T t) {
-        return null;
+        return new SQLITEWhereStatement<>(t, tuxJSQL);
     }
 
     @Override
     public <T> SubWhereStatement<T> createSubWhereStatement(T t) {
-        return null;
+        return new SQLITESubWhereStatement<>(t, tuxJSQL);
     }
 
     @Override
@@ -93,7 +93,7 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public InsertStatement createInsertStatement() {
-        return null;
+        return new SQLITEInsertStatement(tuxJSQL);
     }
 
     @Override
