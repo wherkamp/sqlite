@@ -2,6 +2,7 @@ package dev.tuxjsql.sqlite;
 
 import dev.tuxjsql.basic.builders.BasicSQLBuilder;
 import dev.tuxjsql.basic.sql.BasicDataTypes;
+import dev.tuxjsql.basic.sql.select.BasicJoinStatement;
 import dev.tuxjsql.core.TuxJSQL;
 import dev.tuxjsql.core.builders.ColumnBuilder;
 import dev.tuxjsql.core.builders.TableBuilder;
@@ -52,12 +53,12 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public SelectStatement createSelectStatement() {
-        return null;
+        return new SQLSelectStatement(tuxJSQL);
     }
 
     @Override
     public JoinStatement createJoinStatement(SelectStatement basicSelectStatement) {
-        return null;
+        return new BasicJoinStatement(basicSelectStatement);
     }
 
 

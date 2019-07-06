@@ -3,7 +3,10 @@ import dev.tuxjsql.core.TuxJSQL;
 import dev.tuxjsql.core.TuxJSQLBuilder;
 import dev.tuxjsql.core.response.DBAction;
 import dev.tuxjsql.core.response.DBInsert;
+import dev.tuxjsql.core.response.DBRow;
+import dev.tuxjsql.core.response.DBSelect;
 import dev.tuxjsql.core.sql.SQLTable;
+import dev.tuxjsql.core.sql.select.SelectStatement;
 import dev.tuxjsql.core.sql.where.WhereStatement;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +36,12 @@ public class TestMain {
         //DBInsert dbInsert1  = dbInsert.complete();
         //System.out.println(dbInsert1.primaryKey());
         dbInsert.queue(dbInsert1 -> assertTrue(((int) dbInsert1.primaryKey()) != 0));
+
+        DBSelect select = table.select().column("id").column("name").where().start("id", "=", 1).and().execute().complete();
+        System.out.println(select.numberOfRows());
+        System.out.println(select.first().getRow("name").getAsString());
         System.out.println("Done");
+
 
     }
 
