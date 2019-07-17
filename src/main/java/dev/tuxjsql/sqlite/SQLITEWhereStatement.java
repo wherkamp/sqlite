@@ -1,9 +1,12 @@
 package dev.tuxjsql.sqlite;
 
+import dev.tuxjsql.basic.sql.where.BasicWhereResponse;
 import dev.tuxjsql.basic.sql.where.BasicWhereStatement;
+import dev.tuxjsql.basic.sql.where.WhereUtils;
 import dev.tuxjsql.core.TuxJSQL;
 
 public class SQLITEWhereStatement<T> extends BasicWhereStatement<T> {
+    private BasicWhereResponse response;
 
     public SQLITEWhereStatement(T and, TuxJSQL core) {
         super(and, core);
@@ -15,11 +18,17 @@ public class SQLITEWhereStatement<T> extends BasicWhereStatement<T> {
 
     @Override
     public String getQuery() {
-        return doubleBuild().getKey();
+        if (response == null) {
+            response = WhereUtils.doubleBuild(whereObjects.toArray(), table);
+        }
+        return response.getQuery();
     }
 
     @Override
     public Object[] getValues() {
-        return doubleBuild().getValue();
+        if (response == null) {
+            response = WhereUtils.doubleBuild(whereObjects.toArray(), table);
+        }
+        return response.getValues();
     }
 }

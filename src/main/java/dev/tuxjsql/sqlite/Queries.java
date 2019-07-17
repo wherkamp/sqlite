@@ -14,7 +14,10 @@ public enum Queries {
     DROP_TABLE("DROP TABLE %1$s"),
     DROP_COLUMN("ALTER TABLE %1$s DROP COLUMN %2$s"),
     ADD_COLUMN("ALTER TABLE %1$s ADD COLUMN %2$s"),
-    MODIFY_COLUMN("ALTER TABLE %1$s MODIFY COLUMN %2$s");
+    MODIFY_COLUMN("ALTER TABLE %1$s MODIFY COLUMN %2$s"),
+    //Departments ON Students.DepartmentId = Departments.DepartmentId
+    JOIN("%1$s %2$s ON %3$s.%4$s = %2$s.%5$s")
+    ;
 
     private String string;
 

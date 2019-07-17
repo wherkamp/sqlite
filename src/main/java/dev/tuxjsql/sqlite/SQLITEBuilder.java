@@ -53,7 +53,7 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public SelectStatement createSelectStatement() {
-        return new SQLSelectStatement(tuxJSQL);
+        return new SQLiteSelectStatement(tuxJSQL);
     }
 
     @Override

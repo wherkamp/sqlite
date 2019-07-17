@@ -6,6 +6,7 @@ import dev.tuxjsql.core.response.DBInsert;
 import dev.tuxjsql.core.response.DBRow;
 import dev.tuxjsql.core.response.DBSelect;
 import dev.tuxjsql.core.sql.SQLTable;
+import dev.tuxjsql.core.sql.select.JoinType;
 import dev.tuxjsql.core.sql.select.SelectStatement;
 import dev.tuxjsql.core.sql.where.WhereStatement;
 import org.junit.jupiter.api.Test;
@@ -41,8 +42,10 @@ public class TestMain {
         System.out.println(select.numberOfRows());
         System.out.println(select.first().getRow("name").getAsString());
         System.out.println("Done");
-
-
+        DBSelect two = tabletwo.select().column("id","tableone").column(table.getColumn("name")).join(joinStatement -> {
+            joinStatement.joinType(JoinType.INNER).on("tableone", table.getColumn("id"));
+        }).where().start("id",2).and().execute().complete();
+        System.out.println(two.get(0).getRow("test.name").getAsString());
     }
 
     @Test

@@ -2,6 +2,7 @@ package dev.tuxjsql.sqlite;
 
 import dev.tuxjsql.basic.sql.select.BasicJoinStatement;
 import dev.tuxjsql.basic.sql.select.BasicSelectStatement;
+import dev.tuxjsql.basic.sql.where.BasicWhereStatement;
 import dev.tuxjsql.basic.utils.BasicUtils;
 import dev.tuxjsql.core.TuxJSQL;
 import dev.tuxjsql.core.response.DBAction;
@@ -13,42 +14,46 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SQLSelectStatement extends BasicSelectStatement {
+public class SQLiteSelectStatement extends BasicSelectStatement {
 
 
-    public SQLSelectStatement(TuxJSQL tuxJSQL) {
+    public SQLiteSelectStatement(TuxJSQL tuxJSQL) {
         super(tuxJSQL);
     }
 
     @Override
     public DBAction<DBSelect> execute() {
+        return new DBAction<>(this::select, tuxJSQL);
+    }
 
-        return new DBAction<>(this::select, tuxJSQL);    }
-
-    DBSelect select() {
+    private DBSelect select() {
         DBSelect dbSelect = null;
         StringBuilder columnBuilder = new StringBuilder();
-        int i=0;
+        int i = 0;
         for (SQLColumn column : this.columns) {
-            if(i!=0) columnBuilder.append(",");
-            //.append(column.getTable().getName()).append(".")
-            columnBuilder.append("`").append(column.getName()).append("`");
+            if (i != 0) columnBuilder.append(",");
+
+            columnBuilder.append(column.getTable().getName()).append(".").append(column.getName());
             i++;
         }
         String select = String.format(Queries.SELECT.getString(), columnBuilder.toString(), table.getName());
         Object[] values = new Object[0];
+        BasicJoinStatement joinStatement = (BasicJoinStatement) this.join;
+        if (joinStatement.getJoinType() != null) {
+//Departments ON Students.DepartmentId = Departments.DepartmentId
+            select += " " + String.format(Queries.JOIN.getString(), SQLiteJoinTypes.getType(joinStatement.getJoinType()).getKey(), joinStatement.getTableTwo().getTable().getName(), table.getName(), joinStatement.getTableOneColumn(), joinStatement.getTableTwo().getName());
+//TODO add join statement
+            //PROBLEM I dont know how it works
+        }
+        ((BasicWhereStatement) whereStatement).setTable(table);
         if (whereStatement.getValues().length != 0) {
             select = String.format("%s WHERE %s", select, whereStatement.getQuery());
             values = whereStatement.getValues();
         }
-        BasicJoinStatement joinStatement = (BasicJoinStatement) this.join;
-        if (joinStatement.getJoinType() != null) {
-//TODO add join statement
-            //PROBLEM I dont know how it works
-        }
+
         TuxJSQL.getLogger().debug(select);
         try (Connection connection = tuxJSQL.getConnection(); PreparedStatement statement = connection.prepareStatement(select)) {
-             i = 1;
+            i = 1;
             for (Object o : values) {
                 statement.setObject(i, o);
                 i++;
