@@ -3,7 +3,10 @@ package dev.tuxjsql.sqlite;
 import dev.tuxjsql.core.sql.select.JoinType;
 
 public enum SQLiteJoinTypes {
-    INNER("INNER JOIN", JoinType.INNER);
+    INNER("INNER JOIN", JoinType.INNER),
+    LEFT("LEFT JOIN", JoinType.LEFT),
+    RIGHT("RIGHT JOIN", JoinType.RIGHT),
+    FULL("FULL JOIN", JoinType.FULL);
 
 
     private String key;

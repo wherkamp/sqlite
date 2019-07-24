@@ -7,14 +7,14 @@ import dev.tuxjsql.core.sql.SQLTable;
 
 import java.util.stream.Collectors;
 
-public class SQLITETableBuilder extends BasicTableBuilder {
-    public SQLITETableBuilder(TuxJSQL jsql) {
+public class SQLiteTableBuilder extends BasicTableBuilder {
+    public SQLiteTableBuilder(TuxJSQL jsql) {
         super(jsql);
     }
 
     @Override
     public SQLTable createTable() {
-        SQLITETable table = new SQLITETable(getJsql(), getName(), getColumnBuilders().stream().map(ColumnBuilder::build).collect(Collectors.toList()));
+        SQLiteTable table = new SQLiteTable(getJsql(), getName(), getColumnBuilders().stream().map(ColumnBuilder::build).collect(Collectors.toList()));
         getJsql().getExecutor().execute(table::prepareTable);
         table.prepareTable();
         getJsql().addTable(table);

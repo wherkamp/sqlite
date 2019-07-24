@@ -7,11 +7,11 @@ import dev.tuxjsql.core.sql.SQLTable;
 
 import java.util.List;
 
-public class SQLITEColumn extends BasicSQLColumn {
+public class SQLiteColumn extends BasicSQLColumn {
     private static final String AUTOINCREMENT = " AUTOINCREMENT";
     private static final String PRIMARY_KEY = " PRIMARY KEY";
 
-    public SQLITEColumn(String name, Object defaultValue, List<String> dataTypeRules, boolean notNull, boolean unique, boolean autoIncrement, boolean primaryKey, SQLColumn foreignKey, SQLTable table, SQLDataType type) {
+    public SQLiteColumn(String name, Object defaultValue, List<String> dataTypeRules, boolean notNull, boolean unique, boolean autoIncrement, boolean primaryKey, SQLColumn foreignKey, SQLTable table, SQLDataType type) {
         super(name, defaultValue, dataTypeRules, notNull, unique, autoIncrement, primaryKey, foreignKey, table, type);
     }
 

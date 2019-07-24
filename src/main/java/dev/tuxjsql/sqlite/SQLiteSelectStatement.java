@@ -55,8 +55,7 @@ public class SQLiteSelectStatement extends BasicSelectStatement {
         try (Connection connection = tuxJSQL.getConnection(); PreparedStatement statement = connection.prepareStatement(select)) {
             i = 1;
             for (Object o : values) {
-                statement.setObject(i, o);
-                i++;
+                statement.setObject(i++, o);
             }
             ResultSet set = statement.executeQuery();
             dbSelect = BasicUtils.resultSetToDBSelect(set);

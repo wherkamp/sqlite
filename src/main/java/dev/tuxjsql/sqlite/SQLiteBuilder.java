@@ -17,38 +17,38 @@ import dev.tuxjsql.core.sql.where.WhereStatement;
 import java.io.File;
 import java.util.Properties;
 
-public final class SQLITEBuilder extends BasicSQLBuilder {
+public final class SQLiteBuilder extends BasicSQLBuilder {
     public static final String URL = "jdbc:sqlite:%1$s";
     public static final String JDBC_CLASS = "org.sqlite.JDBC";
     public static final SQLAction[] SUPPORTED_ACTIONS = {SQLAction.SELECT, SQLAction.INSERT, SQLAction.UPDATE, SQLAction.DELETE};
     @Override
     public TableBuilder createTable() {
-        return new SQLITETableBuilder(tuxJSQL);
+        return new SQLiteTableBuilder(tuxJSQL);
     }
 
     @Override
     public ColumnBuilder createColumn() {
-        return new SQLITEColumnBuilder();
+        return new SQLiteColumnBuilder();
     }
 
     @Override
     public WhereStatement createWhere() {
-        return new SQLITEWhereStatement(tuxJSQL);
+        return new SQLiteWhereStatement(tuxJSQL);
     }
 
     @Override
     public SubWhereStatement createSubWhereStatement() {
-        return new SQLITESubWhereStatement(tuxJSQL);
+        return new SQLiteSubWhereStatement(tuxJSQL);
     }
 
     @Override
     public <T> WhereStatement<T> createWhere(T t) {
-        return new SQLITEWhereStatement<>(t, tuxJSQL);
+        return new SQLiteWhereStatement<>(t, tuxJSQL);
     }
 
     @Override
     public <T> SubWhereStatement<T> createSubWhereStatement(T t) {
-        return new SQLITESubWhereStatement<>(t, tuxJSQL);
+        return new SQLiteSubWhereStatement<>(t, tuxJSQL);
     }
 
     @Override
@@ -64,12 +64,12 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public UpdateStatement createUpdateStatement() {
-        return new SQLITEUpdateStatement(tuxJSQL);
+        return new SQLiteUpdateStatement(tuxJSQL);
     }
 
     @Override
     public DeleteStatement createDeleteStatement() {
-        return new SQLITEDeleteStatement(tuxJSQL);
+        return new SQLiteDeleteStatement(tuxJSQL);
     }
 
     @Override
@@ -94,7 +94,7 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public InsertStatement createInsertStatement() {
-        return new SQLITEInsertStatement(tuxJSQL);
+        return new SQLiteInsertStatement(tuxJSQL);
     }
 
     @Override
@@ -113,6 +113,6 @@ public final class SQLITEBuilder extends BasicSQLBuilder {
 
     @Override
     public <T> ColumnBuilder<T> createColumn(T t) {
-        return new SQLITEColumnBuilder<>(t);
+        return new SQLiteColumnBuilder<>(t);
     }
 }

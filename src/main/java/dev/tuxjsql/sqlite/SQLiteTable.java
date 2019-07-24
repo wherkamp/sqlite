@@ -6,8 +6,8 @@ import dev.tuxjsql.core.sql.SQLColumn;
 
 import java.util.List;
 
-public class SQLITETable extends BasicSQLTable {
-    public SQLITETable(TuxJSQL tuxJSQL, String name, List<SQLColumn> sqlColumns) {
+public class SQLiteTable extends BasicSQLTable {
+    public SQLiteTable(TuxJSQL tuxJSQL, String name, List<SQLColumn> sqlColumns) {
         super(tuxJSQL, name, sqlColumns);
     }
 
@@ -29,13 +29,10 @@ public class SQLITETable extends BasicSQLTable {
             columns.append(" ");
             i++;
         }
-        i = 0;
         for (SQLColumn c : sqlColumns) {
             if (c.isForeignKey()) {
                 columns.append(",");
                 columns.append(c.foreignBuild());
-
-                i++;
                 columns.append(" ");
             }
         }

@@ -5,14 +5,14 @@ import dev.tuxjsql.basic.sql.where.BasicWhereStatement;
 import dev.tuxjsql.basic.sql.where.WhereUtils;
 import dev.tuxjsql.core.TuxJSQL;
 
-public class SQLITEWhereStatement<T> extends BasicWhereStatement<T> {
+public class SQLiteWhereStatement<T> extends BasicWhereStatement<T> {
     private BasicWhereResponse response;
 
-    public SQLITEWhereStatement(T and, TuxJSQL core) {
+    public SQLiteWhereStatement(T and, TuxJSQL core) {
         super(and, core);
     }
 
-    public SQLITEWhereStatement(TuxJSQL core) {
+    public SQLiteWhereStatement(TuxJSQL core) {
         super(core);
     }
 

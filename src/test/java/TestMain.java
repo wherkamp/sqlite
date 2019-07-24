@@ -19,10 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestMain {
     @Test
     public void main() {
-
-        Properties properties = new Properties();
-        properties.setProperty("db.file", "db.db");
-        properties.setProperty("db.type", "dev.tuxjsql.sqlite.SQLITEBuilder");
+        Properties properties = getDefaultProperties();
 
         TuxJSQL tuxJSQL = TuxJSQLBuilder.create(properties);
         SQLTable table = tuxJSQL.createTable().setName("test").addColumn().primaryKey().autoIncrement().name("id").setDataType(BasicDataTypes.INTEGER).and().
@@ -42,18 +39,25 @@ public class TestMain {
         System.out.println(select.numberOfRows());
         System.out.println(select.first().getRow("name").getAsString());
         System.out.println("Done");
-        DBSelect two = tabletwo.select().column("id","tableone").column(table.getColumn("name")).join(joinStatement -> {
+        DBSelect two = tabletwo.select().column("id", "tableone").column(table.getColumn("name")).join(joinStatement -> {
             joinStatement.joinType(JoinType.INNER).on("tableone", table.getColumn("id"));
-        }).where().start("id",2).and().execute().complete();
+        }).where().start("id", 2).and().execute().complete();
         System.out.println(two.get(0).getRow("test.name").getAsString());
+        table.update().value("name", "kys").execute().complete();
+        table.delete().where().start("name", "kys").and().execute().complete();
+
+    }
+
+    private Properties getDefaultProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("db.file", "db.db");
+        properties.setProperty("db.type", "dev.tuxjsql.sqlite.SQLiteBuilder");
+        return properties;
     }
 
     @Test
     public void whereAndSubWhere() {
-        Properties properties = new Properties();
-        properties.setProperty("db.file", "db.db");
-        properties.setProperty("db.type", "dev.tuxjsql.sqlite.SQLITEBuilder");
-
+        Properties properties = getDefaultProperties();
         TuxJSQL tuxJSQL = TuxJSQLBuilder.create(properties);
         WhereStatement whereStatement = (WhereStatement) tuxJSQL.createWhere().start("bob", "=", "32").AND().start("x", "=", 2).OR("y", "=", "x").and();
         System.out.println(whereStatement.getQuery());

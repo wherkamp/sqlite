@@ -12,8 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class SQLITEInsertStatement extends BasicInsertStatement {
-    public SQLITEInsertStatement(TuxJSQL tuxJSQL) {
+public class SQLiteInsertStatement extends BasicInsertStatement {
+    public SQLiteInsertStatement(TuxJSQL tuxJSQL) {
         super(tuxJSQL);
     }
 
@@ -40,8 +40,7 @@ public class SQLITEInsertStatement extends BasicInsertStatement {
         try (Connection connection = tuxJSQL.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             int i = 1;
             for (Object object : values) {
-                preparedStatement.setObject(i, object);
-                i++;
+                preparedStatement.setObject(i++, object);
             }
             preparedStatement.executeUpdate();
             Object primaryKey = null;
