@@ -1,6 +1,7 @@
 package dev.tuxjsql.sqlite;
 
 import dev.tuxjsql.basic.sql.BasicSQLColumn;
+import dev.tuxjsql.core.TuxJSQL;
 import dev.tuxjsql.core.sql.SQLColumn;
 import dev.tuxjsql.core.sql.SQLDataType;
 import dev.tuxjsql.core.sql.SQLTable;
@@ -11,8 +12,8 @@ public class SQLiteColumn extends BasicSQLColumn {
     private static final String AUTOINCREMENT = " AUTOINCREMENT";
     private static final String PRIMARY_KEY = " PRIMARY KEY";
 
-    public SQLiteColumn(String name, Object defaultValue, List<String> dataTypeRules, boolean notNull, boolean unique, boolean autoIncrement, boolean primaryKey, SQLColumn foreignKey, SQLTable table, SQLDataType type) {
-        super(name, defaultValue, dataTypeRules, notNull, unique, autoIncrement, primaryKey, foreignKey, table, type);
+    public SQLiteColumn(String name, Object defaultValue, List<String> dataTypeRules, boolean notNull, boolean unique, boolean autoIncrement, boolean primaryKey, SQLColumn foreignKey, SQLTable table, SQLDataType type, TuxJSQL tuxJSQL) {
+        super(name, defaultValue, dataTypeRules, notNull, unique, autoIncrement, primaryKey, foreignKey, table, type,tuxJSQL);
     }
 
     @Override

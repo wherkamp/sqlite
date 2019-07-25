@@ -11,6 +11,7 @@ import dev.tuxjsql.core.sql.select.SelectStatement;
 import dev.tuxjsql.core.sql.where.WhereStatement;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestMain {
     @Test
     public void main() {
+        new File("db.db").deleteOnExit();
         Properties properties = getDefaultProperties();
 
         TuxJSQL tuxJSQL = TuxJSQLBuilder.create(properties);

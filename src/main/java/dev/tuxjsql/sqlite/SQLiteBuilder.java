@@ -27,7 +27,7 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
 
     @Override
     public ColumnBuilder createColumn() {
-        return new SQLiteColumnBuilder();
+        return new SQLiteColumnBuilder(tuxJSQL);
     }
 
     @Override
@@ -109,6 +109,6 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
 
     @Override
     public <T> ColumnBuilder<T> createColumn(T t) {
-        return new SQLiteColumnBuilder<>(t);
+        return new SQLiteColumnBuilder<>(tuxJSQL,t);
     }
 }
