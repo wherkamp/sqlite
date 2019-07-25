@@ -30,20 +30,21 @@ public class SQLiteSelectStatement extends BasicSelectStatement {
         DBSelect dbSelect = null;
         StringBuilder columnBuilder = new StringBuilder();
         int i = 0;
-        for (SQLColumn column : this.columns) {
-            if (i != 0) columnBuilder.append(",");
+        if(columns.isEmpty()){
+            columnBuilder.append("*");
+        }else {
+            for (SQLColumn column : this.columns) {
+                if (i != 0) columnBuilder.append(",");
 
-            columnBuilder.append(column.getTable().getName()).append(".").append(column.getName());
-            i++;
+                columnBuilder.append(column.getTable().getName()).append(".").append(column.getName());
+                i++;
+            }
         }
         String select = String.format(Queries.SELECT.getString(), columnBuilder.toString(), table.getName());
         Object[] values = new Object[0];
         BasicJoinStatement joinStatement = (BasicJoinStatement) this.join;
         if (joinStatement.getJoinType() != null) {
-//Departments ON Students.DepartmentId = Departments.DepartmentId
             select += " " + String.format(Queries.JOIN.getString(), SQLiteJoinTypes.getType(joinStatement.getJoinType()).getKey(), joinStatement.getTableTwo().getTable().getName(), table.getName(), joinStatement.getTableOneColumn(), joinStatement.getTableTwo().getName());
-//TODO add join statement
-            //PROBLEM I dont know how it works
         }
         ((BasicWhereStatement) whereStatement).setTable(table);
         if (whereStatement.getValues().length != 0) {
