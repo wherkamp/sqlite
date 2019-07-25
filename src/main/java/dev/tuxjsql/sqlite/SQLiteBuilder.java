@@ -20,7 +20,6 @@ import java.util.Properties;
 public final class SQLiteBuilder extends BasicSQLBuilder {
     public static final String URL = "jdbc:sqlite:%1$s";
     public static final String JDBC_CLASS = "org.sqlite.JDBC";
-    public static final SQLAction[] SUPPORTED_ACTIONS = {SQLAction.SELECT, SQLAction.INSERT, SQLAction.UPDATE, SQLAction.DELETE};
     @Override
     public TableBuilder createTable() {
         return new SQLiteTableBuilder(tuxJSQL);
@@ -82,10 +81,7 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
         return JDBC_CLASS;
     }
 
-    @Override
-    public SQLAction[] supportedActions() {
-        return SUPPORTED_ACTIONS;
-    }
+
 
     @Override
     public SQLDataType convertDataType(BasicDataTypes dataType) {
