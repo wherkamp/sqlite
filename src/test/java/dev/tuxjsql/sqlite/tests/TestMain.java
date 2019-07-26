@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestMain {
     @Test
-    public void baseTests() {
+    public void baseTests() throws InterruptedException {
         new File("db.db").deleteOnExit();
         Properties properties = getDefaultProperties();
 
