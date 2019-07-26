@@ -23,7 +23,8 @@ public class SQLiteInsertStatement extends BasicInsertStatement {
     }
 
     private DBInsert doInsert() {
-        DBInsert insert = null;
+
+        Object primaryKey = null;
         StringBuilder columnsToInsert = new StringBuilder();
         StringBuilder question = new StringBuilder();
         for (String column : values.keySet()) {
@@ -43,7 +44,6 @@ public class SQLiteInsertStatement extends BasicInsertStatement {
                 preparedStatement.setObject(i++, object);
             }
             preparedStatement.executeUpdate();
-            Object primaryKey = null;
             for (Map.Entry<String, Object> o : this.values.entrySet()) {
                 if (table.getColumn(o.getKey()).primaryKey()) {
                     primaryKey = o.getValue();
@@ -55,15 +55,16 @@ public class SQLiteInsertStatement extends BasicInsertStatement {
                     if (set != null && set.next()) {
                         primaryKey = set.getObject(1);
                     }
-                }catch (SQLException e){
+                } catch (SQLException e) {
                     TuxJSQL.getLogger().error("Unable to get primaryKey for latest insert", e);
                 }
             }
-            insert = new BasicDBInsert(table, primaryKey);
 
         } catch (SQLException e) {
             TuxJSQL.getLogger().error("Unable to insert to table", e);
+            return new BasicDBInsert(table, null, false);
         }
-        return insert;
+        //This should never be null
+        return new BasicDBInsert(table, primaryKey, true);
     }
 }
