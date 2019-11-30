@@ -6,4 +6,5 @@
 
 |Property Key| Description | 
 |--|--|
+| db.type | `dev.tuxjsql.sqlite.SQLiteBuilder` |
 | db.file | The file for the database |  
