@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestMain {
     @Test
-    public void baseTests() throws InterruptedException {
+    public void baseTests() throws Exception {
         new File("db.db").deleteOnExit();
         Properties properties = getDefaultProperties();
 
@@ -56,7 +56,7 @@ public class TestMain {
     }
 
     @Test
-    public void whereAndSubWhere() {
+    public void whereAndSubWhere() throws Exception {
         Properties properties = getDefaultProperties();
         TuxJSQL tuxJSQL = TuxJSQLBuilder.create(properties);
         WhereStatement whereStatement = (WhereStatement) tuxJSQL.createWhere().start("bob", "=", "32").AND().start("x", "=", 2).OR("y", "=", "x").and();

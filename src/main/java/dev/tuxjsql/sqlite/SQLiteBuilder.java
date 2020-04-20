@@ -94,7 +94,7 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
     }
 
     @Override
-    public void configureConnectionProvider(ConnectionProvider provider, Properties userProperties) {
+    public void configureConnectionProvider(ConnectionProvider provider, Properties userProperties) throws Exception{
         String url;
         if (userProperties.getProperty("db.file").equalsIgnoreCase("memory")) {
             url = String.format(URL, ":memory:");
