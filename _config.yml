@@ -1,10 +1,10 @@
 remote_theme: pmarsceill/just-the-docs
 title: TuxJSQL SQLITE
 description: Tuxjsql SQLITE documentation
-url: "https://tuxjsql.dev"
+url: "https://tuxjsql.potatocorp.dev"
 baseurl: "/sqlite/"
 aux_links:
   "TuxJSQL Home":
-    - "https://tuxjsql.dev"
+    - "https://tuxjsql.potatocorp.dev"
   "TuxJSQL SQLITE GitHub":
     - "//github.com/tuxjsql/SQLITE"
