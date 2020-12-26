@@ -1,8 +1,9 @@
-package dev.tuxjsql.sqlite;
+package me.kingtux.tuxjsql.sqlite;
 
 import dev.tuxjsql.basic.builders.BasicSQLBuilder;
 import dev.tuxjsql.basic.sql.BasicDataTypes;
 import dev.tuxjsql.basic.sql.select.BasicJoinStatement;
+import dev.tuxjsql.core.Configuration;
 import dev.tuxjsql.core.TuxJSQL;
 import dev.tuxjsql.core.builders.ColumnBuilder;
 import dev.tuxjsql.core.builders.TableBuilder;
@@ -105,6 +106,11 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
         if (TuxJSQL.getLogger().isDebugEnabled())
             TuxJSQL.getLogger().debug(String.format("URL:%s", url));
         provider.setup(new ConnectionSettings(jdbcClass(), url), userProperties);
+    }
+
+    @Override
+    public void configureConnectionProvider(Configuration configuration) throws Exception {
+
     }
 
     @Override

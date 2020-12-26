@@ -1,4 +1,4 @@
-package dev.tuxjsql.sqlite;
+package me.kingtux.tuxjsql.sqlite;
 
 public enum Queries {
     FOREIGN_VALUE("FOREIGN KEY ('%1$s') REFERENCES %2$s('%3$s')"),

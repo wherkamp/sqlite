@@ -1,4 +1,4 @@
-package dev.tuxjsql.sqlite;
+package me.kingtux.tuxjsql.sqlite;
 
 import dev.tuxjsql.basic.response.BasicDBDelete;
 import dev.tuxjsql.basic.sql.BasicDeleteStatement;

@@ -1,4 +1,4 @@
-package dev.tuxjsql.sqlite.tests;
+package me.kingtux.tuxjsql.sqlite.tests;
 
 import dev.tuxjsql.basic.sql.BasicDataTypes;
 import dev.tuxjsql.core.TuxJSQL;
@@ -51,7 +51,7 @@ public class TestMain {
     private Properties getDefaultProperties() {
         Properties properties = new Properties();
         properties.setProperty("db.file", "db.db");
-        properties.setProperty("db.type", "dev.tuxjsql.sqlite.SQLiteBuilder");
+        properties.setProperty("db.type", "me.kingtux.tuxjsql.sqlite.SQLiteBuilder");
         return properties;
     }
 

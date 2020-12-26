@@ -1,4 +1,4 @@
-package dev.tuxjsql.sqlite;
+package me.kingtux.tuxjsql.sqlite;
 
 import dev.tuxjsql.basic.sql.where.BasicSubWhereStatement;
 import dev.tuxjsql.basic.sql.where.BasicWhereResponse;
