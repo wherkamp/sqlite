@@ -1,9 +1,9 @@
 package me.kingtux.tuxjsql.sqlite;
 
-import dev.tuxjsql.basic.sql.where.BasicSubWhereStatement;
-import dev.tuxjsql.basic.sql.where.BasicWhereResponse;
-import dev.tuxjsql.basic.sql.where.WhereUtils;
-import dev.tuxjsql.core.TuxJSQL;
+import me.kingtux.tuxjsql.basic.sql.where.BasicSubWhereStatement;
+import me.kingtux.tuxjsql.basic.sql.where.BasicWhereResponse;
+import me.kingtux.tuxjsql.basic.sql.where.WhereUtils;
+import me.kingtux.tuxjsql.core.TuxJSQL;
 
 
 public class SQLiteSubWhereStatement<T> extends BasicSubWhereStatement<T> {

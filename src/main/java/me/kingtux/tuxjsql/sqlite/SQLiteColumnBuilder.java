@@ -1,8 +1,8 @@
 package me.kingtux.tuxjsql.sqlite;
 
-import dev.tuxjsql.basic.builders.BasicColumnBuilder;
-import dev.tuxjsql.core.TuxJSQL;
-import dev.tuxjsql.core.sql.SQLColumn;
+import me.kingtux.tuxjsql.basic.builders.BasicColumnBuilder;
+import me.kingtux.tuxjsql.core.TuxJSQL;
+import me.kingtux.tuxjsql.core.sql.SQLColumn;
 
 public class SQLiteColumnBuilder<T> extends BasicColumnBuilder<T> {
     public SQLiteColumnBuilder(TuxJSQL tuxJSQL, T andValue) {

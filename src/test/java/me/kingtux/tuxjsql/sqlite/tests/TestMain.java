@@ -1,14 +1,14 @@
 package me.kingtux.tuxjsql.sqlite.tests;
 
-import dev.tuxjsql.basic.sql.BasicDataTypes;
-import dev.tuxjsql.core.TuxJSQL;
-import dev.tuxjsql.core.TuxJSQLBuilder;
-import dev.tuxjsql.core.response.DBAction;
-import dev.tuxjsql.core.response.DBInsert;
-import dev.tuxjsql.core.response.DBSelect;
-import dev.tuxjsql.core.sql.SQLTable;
-import dev.tuxjsql.core.sql.select.JoinType;
-import dev.tuxjsql.core.sql.where.WhereStatement;
+import me.kingtux.tuxjsql.basic.sql.BasicDataTypes;
+import me.kingtux.tuxjsql.core.TuxJSQL;
+import me.kingtux.tuxjsql.core.TuxJSQLBuilder;
+import me.kingtux.tuxjsql.core.response.DBAction;
+import me.kingtux.tuxjsql.core.response.DBInsert;
+import me.kingtux.tuxjsql.core.response.DBSelect;
+import me.kingtux.tuxjsql.core.sql.SQLTable;
+import me.kingtux.tuxjsql.core.sql.select.JoinType;
+import me.kingtux.tuxjsql.core.sql.where.WhereStatement;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
