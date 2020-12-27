@@ -9,11 +9,15 @@ import me.kingtux.tuxjsql.core.builders.ColumnBuilder;
 import me.kingtux.tuxjsql.core.builders.TableBuilder;
 import me.kingtux.tuxjsql.core.connection.ConnectionProvider;
 import me.kingtux.tuxjsql.core.connection.ConnectionSettings;
-import me.kingtux.tuxjsql.core.sql.*;
+import me.kingtux.tuxjsql.core.sql.DeleteStatement;
+import me.kingtux.tuxjsql.core.sql.InsertStatement;
+import me.kingtux.tuxjsql.core.sql.SQLDataType;
+import me.kingtux.tuxjsql.core.sql.UpdateStatement;
 import me.kingtux.tuxjsql.core.sql.select.JoinStatement;
 import me.kingtux.tuxjsql.core.sql.select.SelectStatement;
 import me.kingtux.tuxjsql.core.sql.where.SubWhereStatement;
 import me.kingtux.tuxjsql.core.sql.where.WhereStatement;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.Properties;
@@ -21,6 +25,7 @@ import java.util.Properties;
 public final class SQLiteBuilder extends BasicSQLBuilder {
     public static final String URL = "jdbc:sqlite:%1$s";
     public static final String JDBC_CLASS = "org.sqlite.JDBC";
+
     @Override
     public TableBuilder createTable() {
         return new SQLiteTableBuilder(tuxJSQL);
@@ -83,7 +88,6 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
     }
 
 
-
     @Override
     public SQLDataType convertDataType(BasicDataTypes dataType) {
         return dataType;
@@ -95,7 +99,7 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
     }
 
     @Override
-    public void configureConnectionProvider(ConnectionProvider provider, Properties userProperties) throws Exception{
+    public void configureConnectionProvider(ConnectionProvider provider, Properties userProperties) throws Exception {
         String url;
         if (userProperties.getProperty("db.file").equalsIgnoreCase("memory")) {
             url = String.format(URL, ":memory:");
@@ -109,12 +113,13 @@ public final class SQLiteBuilder extends BasicSQLBuilder {
     }
 
     @Override
-    public void configureConnectionProvider(Configuration configuration) throws Exception {
-
+    public void configureConnectionProvider(ConnectionProvider provider, Configuration configuration) throws Exception {
+        Pair<ConnectionSettings, Properties> connection = configuration.createConnection();
+        provider.setup(connection.getLeft(), connection.getRight());
     }
 
     @Override
     public <T> ColumnBuilder<T> createColumn(T t) {
-        return new SQLiteColumnBuilder<>(tuxJSQL,t);
+        return new SQLiteColumnBuilder<>(tuxJSQL, t);
     }
 }
